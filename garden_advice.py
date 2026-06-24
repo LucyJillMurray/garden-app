@@ -12,6 +12,13 @@ plant_advice = {
     "vegetable": "Keep an eye out for pests!",
     "herb": "Trim regularly to encourage bushy growth."
 }
+# Dictionary holding recommended plants for each season
+season_plants = {
+    "summer": ["tomatoes", "sunflowers", "peppers"],
+    "winter": ["kale", "garlic", "broad beans"],
+    "spring": ["lettuce", "carrots", "daffodils"],
+    "autumn": ["pumpkins", "Brussels sprouts", "chrysanthemums"]
+}
 
 # Get user input
 season = input("Enter a season: ")
@@ -24,10 +31,16 @@ plant_message = plant_advice.get(plant_type, "No advice for this type of plant."
 
 # Combine and print the generated advice
 advice = f"{season_message}\n{plant_message}"
+
+# Look up recommended plants for the season, if any exist
+recommended = season_plants.get(season)
+if recommended:
+    advice += f"\nRecommended plants for {season}: {', '.join(recommended)}."
+
+# Print the generated advice
 print(advice)
 
 # TODO: Examples of possible features to add:
 # - Add detailed comments explaining each block of code.
-# - Refactor the code into functions for better readability and modularity.
-# - Store advice in a dictionary for multiple plants and seasons.
+# - Refactor the code into functions for better readability and modularity
 # - Recommend plants based on the entered season.
