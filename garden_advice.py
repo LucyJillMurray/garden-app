@@ -6,7 +6,6 @@ season_advice = {
     "autumn": "Clear fallen leaves and prepare beds for winter."
 }
 
-# Dictionary holding gardening advice for each plant type
 plant_advice = {
     "flower": "Use fertiliser to encourage blooms.",
     "vegetable": "Keep an eye out for pests!",
@@ -20,14 +19,45 @@ season_plants = {
     "autumn": ["pumpkins", "Brussels sprouts", "chrysanthemums"]
 }
 
-# Get user input
-season = input("Enter a season: ")
-plant_type = input("Enter a plant: ")
+season_plants = {
+    "summer": ["tomatoes", "sunflowers", "peppers"],
+    "winter": ["kale", "garlic", "broad beans"],
+    "spring": ["lettuce", "carrots", "daffodils"],
+    "autumn": ["pumpkins", "Brussels sprouts", "chrysanthemums"]
+}
 
 
-# Look up advice, with a fallback message if not found
-season_message = season_advice.get(season, "No advice for this season.")
-plant_message = plant_advice.get(plant_type, "No advice for this type of plant.")
+def get_user_input():
+    season = input("Enter a season: ")
+    plant_type = input("Enter a plant: ")
+    return season, plant_type
+
+
+def get_season_advice(season):
+    return season_advice.get(season, "No advice for this season.")
+
+
+def get_plant_advice(plant_type):
+    return plant_advice.get(plant_type, "No advice for this type of plant.")
+
+
+def get_plant_recommendations(season):
+    recommended = season_plants.get(season)
+    if recommended:
+        return f"\nRecommended plants for {season}: {', '.join(recommended)}."
+    return ""
+
+
+def build_advice(season, plant_type):
+    advice = f"{get_season_advice(season)}\n{get_plant_advice(plant_type)}"
+    advice += get_plant_recommendations(season)
+    return advice
+
+
+def main():
+    season, plant_type = get_user_input()
+    advice = build_advice(season, plant_type)
+    print(advice)
 
 # Combine and print the generated advice
 advice = f"{season_message}\n{plant_message}"
